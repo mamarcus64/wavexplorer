@@ -46,7 +46,7 @@ application.add_url_rule('/', 'index', (lambda: header_text +
 # application.add_url_rule('/ping_backend', {'data' : 'pong'})
 @application.route('/api/ping_backend')
 def get_topics():
-    return {"data": 'pong'}
+    return {"data": 'pong!'}
 
 # run the app.
 if __name__ == "__main__":

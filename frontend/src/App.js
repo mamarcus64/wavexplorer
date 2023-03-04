@@ -4,9 +4,8 @@ import axios from 'axios';
 import './App.css';
 
 class App extends Component {
-  // backend_url = 'http://localhost:5000/api';
-  // backend_url = 'http://flask-env.eba-d7yx62pk.us-east-1.elasticbeanstalk.com/api';
-  backend_url = '/api';
+  // backend_url = 'http://localhost:5000/api'; // use this for local development
+  backend_url = '/api'; // use this for deployment to AWS
 
   state = {
     answer: ""
