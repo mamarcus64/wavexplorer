@@ -10,13 +10,15 @@ def main():
 
     token = get_authorization_token()
     headers = {'Authorization' : f'Bearer {token}', 'Content-Type' : 'application/json', 'accept' : 'application/json'}
-    artist_ids = ['5K4W6rqBFWDnAN6FQUkS6x']
+    artist_ids = ['4LLpKhyESsyAXpc4laK94U']
     for artist_id in artist_ids:
         album_ids = get_albums(artist_id, headers)
+        print(len(album_ids))
         collabs = get_collabs(artist_id, album_ids, headers)
         artist_to_id, id_to_artist = update_artist_list(collabs, headers)
         for collab_id in collabs.keys():
-            update_collabs(all_collabs, id_to_artist[artist_id], id_to_artist[collab_id], collabs[collab_id])
+            if collab_id in id_to_artist: #technically should always be true, but found weird exceptions while debugging
+                update_collabs(all_collabs, id_to_artist[artist_id], id_to_artist[collab_id], collabs[collab_id])
         json.dump(all_collabs, open('collabs.json', 'w', encoding='utf8'), ensure_ascii=False, indent=2)
 
 def requests_try_catch(endpoint, headers):
@@ -27,7 +29,10 @@ def requests_try_catch(endpoint, headers):
             break
         except:
             time.sleep(0.1)
-            print(f'API call failed for: {endpoint}')
+            print(f'API call failed for: {endpoint}. Retrying.')
+            tries += 1
+            if tries == 10:
+                print('API call failed 10 times in a row. Aborting.')
     return response
 
 def update_collabs(collabs, artist_name, collab_name, track):

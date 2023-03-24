@@ -1,3 +1,7 @@
 .elasticbeanstalk
 .git
 credentials.json
+notes.txt
+backend/final_graph.json
+musicbrainz
+spotify_scraping
