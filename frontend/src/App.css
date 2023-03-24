@@ -35,6 +35,16 @@
   margin-bottom: 10vh;
 }
 
+#autocomplete {
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom:
+}
+
 .column {
   flex: 50%;
   width:100px;
@@ -159,13 +169,6 @@ h6 {
   justify-content: center;
   overflow: hidden;
 } */
-
-svg {
-  width: 60px;
-  width: 800px;
-  height: 100%;
-  padding: 50px;
-}
 
 line {
   stroke-width: 1;

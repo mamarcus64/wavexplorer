@@ -34,6 +34,8 @@ footer_text = '</body>\n</html>'
 application = Flask(__name__)
 CORS(application)
 
+graph = None
+
 # add a rule for the index page.
 application.add_url_rule('/', 'index', (lambda: header_text +
     say_hello() + instructions + footer_text))
@@ -53,4 +55,11 @@ if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
     # removed before deploying a production app.
     application.debug = True
+    import os
+    if 'final_graph.json' not in os.listdir(): # unzip file
+        import zipfile
+        with zipfile.ZipFile('./final_graph.zip', 'r') as zip_ref:
+            zip_ref.extractall('.')
+    graph = json.load(open('final_graph.json', 'r', encoding='utf-8'))
     application.run()
+    print(os.listdir())
