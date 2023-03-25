@@ -15,6 +15,7 @@
 
 from flask import Flask
 from flask_cors import CORS
+import json
 
 # print a nice greeting.
 def say_hello(username = "World"):
@@ -49,6 +50,26 @@ application.add_url_rule('/', 'index', (lambda: header_text +
 @application.route('/api/ping_backend')
 def get_topics():
     return {"data": 'pong!'}
+
+@application.route('/api/daily_challenge')
+def get_daily_challenge():
+    return {'start': 'Kanye West', 'end' :'Clairo'}
+
+@application.route('/api/get_collabs/')
+def null_func(): # just to avoid some pesky JS errors
+    return {}
+
+@application.route('/api/get_collabs/<artist>')
+def get_artist_collabs(artist):
+    if artist in graph.keys():
+        collabs = graph[artist]
+        listified = []
+        for i, collab in enumerate(collabs.keys()):
+            listified.append({'id' : i, 'name' : collab, 'song' : collabs[collab]})
+        return {'data' : listified, 'valid' : True}
+    else:
+        return {'data' : {}, 'valid' : False}
+
 
 # run the app.
 if __name__ == "__main__":

@@ -3,8 +3,8 @@ import axios from 'axios';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import './App.css';
 
-var backend_url = 'http://localhost:5000/api'; // use this for local development
-//var backend_url = '/api'; // use this for deployment to AWS
+// var backend_url = 'http://localhost:5000/api'; // use this for local development
+var backend_url = '/api'; // use this for deployment to AWS
 
 async function getCollabs(artist) {
   artist = artist.replace(/ /g, '%20')
